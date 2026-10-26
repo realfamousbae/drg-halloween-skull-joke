@@ -24,7 +24,7 @@ IdleA и IdleB играют **одновременно**, а pitch всего cu
 - кладёт трек только в **IdleA**, в **IdleB** — 1 с тишины (иначе две копии с разным рандомным pitch дают «флэнжер»);
 - патчит cue на месте (размеры не меняются): `VolumeMultiplier` 0.5 → 1.0, pitch `ModulatorContinuous_0` 0.7/2.0 → 1.0/1.0,
   `Mixer_1.ChildNodes[0]` переключён с `Modulator_0` прямо на WavePlayer IdleA (без рандомного детюна),
-  `Mixer_1.InputVolume[0]` (IdleA) 0.35 → 1.8, `Mixer_3.InputVolume[1]` (огненный слой) 1.0 → 0.0.
+  `Mixer_1.InputVolume[0]` (IdleA) 0.35 → 4.0 (`--volume`; UE ограничивает суммарную громкость звука значением 4.0), `Mixer_3.InputVolume[1]` (огненный слой) 1.0 → 0.0.
 
 Оригинальные волны:
 
@@ -37,7 +37,7 @@ IdleA и IdleB играют **одновременно**, а pitch всего cu
 они **не заменяются** (их используют другие враги), поэтому мод глушит весь этот слой в cue (`Mixer_3.InputVolume[1]` = 0).
 
 Затухание по расстоянию: `Audio/SoundControl/AttenuationGroups/HalloweenSkullSoundAttenuation`
-(cue ссылается на `GenericNarrowLargeAttenuation` — какое реально применяется, проверить в игре).
+(cue ссылается на `GenericNarrowLargeAttenuation` — какая из двух реально применяется, не выяснено).
 
 ## Другие звуки черепа (не заменяются, кандидаты для следующих версий)
 
