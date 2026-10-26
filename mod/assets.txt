@@ -1,4 +1,5 @@
 # Assets replaced by this mod, one per line, relative to FSD/Content, without extension.
-# Found by scanning the pak index (see mod/ASSET_PATHS.md). The cue HalloweenSkullIdle_Cue is left untouched.
+# scripts/build_mod.py has its own roles for them (track / silence / cue patch); this list is for pack.ps1.
 Audio/SFX/Season_Halloween/HalloweenSkull/HalloweenSkullIdleA_1
 Audio/SFX/Season_Halloween/HalloweenSkull/HalloweenSkullIdleB_1
+Audio/SFX/Season_Halloween/HalloweenSkullIdle_Cue
