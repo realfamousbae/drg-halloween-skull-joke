@@ -30,8 +30,11 @@ WAVE_SILENT = HALLOWEEN + "HalloweenSkull/HalloweenSkullIdleB_1"
 CUE = HALLOWEEN + "HalloweenSkullIdle_Cue"
 
 SAMPLE_RATE = 48000      # same as the vanilla waves, so SampleRate needs no patching
-DEFAULT_LUFS = -14.0     # vanilla waves measure -20.1 / -17.4 LUFS, but they play doubled
-TRUE_PEAK = -2.0         # Vorbis overshoots by ~1 dB, keep the decoded peak below 0 dBFS
+DEFAULT_LUFS = -10.0     # loud on purpose; vanilla waves measure -20.1 / -17.4 LUFS
+# Track gain in the cue (Mixer_1.InputVolume[0], vanilla 0.35). UE clamps a sound's total volume
+# at 4.0, so past that only --lufs makes it louder.
+DEFAULT_TRACK_VOLUME = 4.0
+TRUE_PEAK = -4.0         # Vorbis overshoots by up to ~3 dB, keep the decoded peak below 0 dBFS
 SILENCE_SECONDS = 1.0
 
 # Fixed layout of these cooked waves (identical for A and B, asserted below).
@@ -47,9 +50,6 @@ CUE_PATCHES = [
     (959 + 25, "<f", 2.0, 1.0, "root ModulatorContinuous pitch MaxOutput (Speed 1)"),
     # Mixer_1.ChildNodes[0]: Modulator_0 (random pitch 0.95-1.05) -> WavePlayer_0 (IdleA) directly
     (340, "<i", 5, 11, "Mixer_1.ChildNodes[0]"),
-    # IdleA input was 0.35 while IdleB (now silent) was 3.0 and carried most of the vanilla level.
-    # 1.8 with VolumeMultiplier 1.0 is ~2x what the first build (track in both waves) sounded like.
-    (295, "<f", 0.35, 1.8, "Mixer_1.InputVolume[0] (IdleA)"),
     # Mixer_3.InputVolume[1]: Mixer_2 = boss fireball layer, shared with other enemies -> mute here
     (507, "<f", 1.0, 0.0, "Mixer_3.InputVolume[1] (fireball layer)"),
 ]
@@ -133,11 +133,12 @@ def patch_wave(uasset, uexp, ogg, channels, duration):
     return bytes(ua), bytes(new_ux)
 
 
-def patch_cue(uexp):
+def patch_cue(uexp, track_volume):
     ux = bytearray(uexp)
     if len(ux) != 1672:
         die("unexpected SoundCue size - the game was probably updated; re-check the cue (see README)")
-    for off, fmt, old, new, what in CUE_PATCHES:
+    patches = CUE_PATCHES + [(295, "<f", 0.35, track_volume, "Mixer_1.InputVolume[0] (IdleA)")]
+    for off, fmt, old, new, what in patches:
         cur = struct.unpack_from(fmt, ux, off)[0]
         if abs(cur - old) > 1e-4:
             die(f"unexpected {what} = {cur} (expected {old}) - re-check the cue (see README)")
@@ -155,6 +156,8 @@ def main():
                     help="trim the track to this length; it loops in game (vanilla waves are 20.5 s)")
     ap.add_argument("--fade", type=float, default=1.0, help="fade-out length in seconds, 0 to disable")
     ap.add_argument("--lufs", type=float, default=DEFAULT_LUFS, help="loudness target, integrated LUFS")
+    ap.add_argument("--volume", type=float, default=DEFAULT_TRACK_VOLUME,
+                    help="track gain in the cue (vanilla 0.35; UE caps the total at 4.0)")
     ap.add_argument("--stereo", action="store_true",
                     help="keep stereo (vanilla); default is mono, which is positioned in 3D at the skull")
     ap.add_argument("--no-loudnorm", action="store_true")
@@ -193,7 +196,7 @@ def main():
             die(f"asset not found in the game pak: {asset}")
         ua, ux = ua_path.read_bytes(), ux_path.read_bytes()
         if asset == CUE:
-            ux = patch_cue(ux)
+            ux = patch_cue(ux, args.volume)
         else:
             ua, ux = patch_wave(ua, ux, ogg, channels, duration)
         out_ua, out_ux = files(stage, asset)
