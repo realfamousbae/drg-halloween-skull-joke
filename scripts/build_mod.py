@@ -47,6 +47,11 @@ CUE_PATCHES = [
     (959 + 25, "<f", 2.0, 1.0, "root ModulatorContinuous pitch MaxOutput (Speed 1)"),
     # Mixer_1.ChildNodes[0]: Modulator_0 (random pitch 0.95-1.05) -> WavePlayer_0 (IdleA) directly
     (340, "<i", 5, 11, "Mixer_1.ChildNodes[0]"),
+    # IdleA input was 0.35 while IdleB (now silent) was 3.0 and carried most of the vanilla level.
+    # 1.8 with VolumeMultiplier 1.0 is ~2x what the first build (track in both waves) sounded like.
+    (295, "<f", 0.35, 1.8, "Mixer_1.InputVolume[0] (IdleA)"),
+    # Mixer_3.InputVolume[1]: Mixer_2 = boss fireball layer, shared with other enemies -> mute here
+    (507, "<f", 1.0, 0.0, "Mixer_3.InputVolume[1] (fireball layer)"),
 ]
 
 

@@ -10,7 +10,7 @@
 ```
 ModulatorContinuous_0  (pitch по параметру Speed: 0.7 → 2.0)
 └─ Mixer_3
-   ├─ Mixer_1
+   ├─ Mixer_1 (InputVolume: A 0.35, B 3.0)
    │  ├─ Modulator_0 (рандом pitch/volume 0.95–1.05) ─ IdleA
    │  └─ ModulatorContinuous_2 (volume по Speed: 1 → 10) ─ Modulator_1 ─ IdleB
    └─ Mixer_2
@@ -23,7 +23,8 @@ IdleA и IdleB играют **одновременно**, а pitch всего cu
 
 - кладёт трек только в **IdleA**, в **IdleB** — 1 с тишины (иначе две копии с разным рандомным pitch дают «флэнжер»);
 - патчит cue на месте (размеры не меняются): `VolumeMultiplier` 0.5 → 1.0, pitch `ModulatorContinuous_0` 0.7/2.0 → 1.0/1.0,
-  `Mixer_1.ChildNodes[0]` переключён с `Modulator_0` прямо на WavePlayer IdleA (без рандомного детюна).
+  `Mixer_1.ChildNodes[0]` переключён с `Modulator_0` прямо на WavePlayer IdleA (без рандомного детюна),
+  `Mixer_1.InputVolume[0]` (IdleA) 0.35 → 1.8, `Mixer_3.InputVolume[1]` (огненный слой) 1.0 → 0.0.
 
 Оригинальные волны:
 
@@ -33,8 +34,7 @@ IdleA и IdleB играют **одновременно**, а pitch всего cu
 | Idle-звук черепа, вариант B | `Audio/SFX/Season_Halloween/HalloweenSkull/HalloweenSkullIdleB_1` | 18.4 с | 2 × 48 кГц, OGG | −17.4 LUFS |
 
 В том же cue есть ещё два звука огненных шаров босса (`Audio/SFX/Enemies/GlyphidDreadnaught/Fireball/SpiderTankBoss_FireballB_1`, `…FireballC_1`) —
-они **не заменяются** (их используют другие враги), поэтому поверх трека слышен «огненный» слой. После патча cue он тоже
-стал в 2 раза громче и без зависимости от скорости. Заглушить его можно, обнулив `Mixer_2.InputVolume` в cue.
+они **не заменяются** (их используют другие враги), поэтому мод глушит весь этот слой в cue (`Mixer_3.InputVolume[1]` = 0).
 
 Затухание по расстоянию: `Audio/SoundControl/AttenuationGroups/HalloweenSkullSoundAttenuation`
 (cue ссылается на `GenericNarrowLargeAttenuation` — какое реально применяется, проверить в игре).
