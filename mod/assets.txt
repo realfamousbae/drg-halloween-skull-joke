@@ -1,0 +1,4 @@
+# Assets replaced by this mod, one per line, relative to FSD/Content, without extension.
+# Fill in after finding the skull sound in FModel (see mod/ASSET_PATHS.md).
+# Example:
+# Audio/Halloween/SW_FlyingSkull_Loop

@@ -1,0 +1,19 @@
+# Unreal Engine
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+*.sln
+.vs/
+
+# Build output
+build/
+*.pak
+*.utoc
+*.ucas
+*.zip
+
+# Source tracks (may be copyrighted) — commit only if you own the rights
+audio/source/*
+!audio/source/README.md
+audio/converted/
