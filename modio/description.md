@@ -5,6 +5,7 @@
 **Версия:** 1.0.0
 **Совместимость:** Deep Rock Galactic, Halloween event 2026
 **Файл:** `SkullJoke-1.0.0.zip` → `SkullJoke_P.pak`
+**Логотип:** `modio/logo.png` (1671×941, 16:9)
 
 ## Описание (RU)
 
