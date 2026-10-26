@@ -1,4 +1,4 @@
 # Assets replaced by this mod, one per line, relative to FSD/Content, without extension.
-# Fill in after finding the skull sound in FModel (see mod/ASSET_PATHS.md).
-# Example:
-# Audio/Halloween/SW_FlyingSkull_Loop
+# Found by scanning the pak index (see mod/ASSET_PATHS.md). The cue HalloweenSkullIdle_Cue is left untouched.
+Audio/SFX/Season_Halloween/HalloweenSkull/HalloweenSkullIdleA_1
+Audio/SFX/Season_Halloween/HalloweenSkull/HalloweenSkullIdleB_1
