@@ -1,31 +1,33 @@
-# Spooky Skull Remix
+# mod.io page
 
-**Тип:** Audio (клиентский, хосту и другим игрокам ставить не нужно)
-**Теги mod.io:** Audio, Sound, Halloween, Joke
-**Версия:** 1.0.0
-**Совместимость:** Deep Rock Galactic, Halloween event 2026
-**Файл:** `SkullJoke-1.0.0.zip` → `SkullJoke_P.pak`
-**Логотип:** `modio/logo.png` (1671×941, 16:9)
+## Settings
 
-## Описание (RU)
+| Field | Value |
+|---|---|
+| Name | `Halloween Skull Joke` |
+| Visibility | Hidden (friends are added to the mod's Team) |
+| Tags | `Audio` (no `[AimedFor...]`) |
+| Game Version | the one the pak was built and tested on (1.40 for v1.0.0) |
+| Required | `Optional`: client-side, other players don't need it |
+| Logo | `modio/logo.png`, 16:9, at least 512×288 |
+| File | `SkullJoke-<version>.zip` with `SkullJoke_P.pak` inside |
 
-Летающий хэллоуинский череп больше не ухает зловеще — теперь он играет собственный трек.
+## Summary
+```
+Replaces the sound of the flying Halloween skull with your own track. Audio only, client-side.
+```
 
-- Заменён idle-звук черепа: трек звучит из самого черепа (3D) и затихает с расстоянием.
-- Трек играет как есть: без замедления и ускорения от скорости полёта черепа.
-- Огненный «вжух» под звуком черепа отключён — только у черепа, у других врагов он остаётся.
-- Только звук, геймплей не меняется. Клиентский мод: слышите только вы.
-
-## Description (EN)
-
-The Halloween flying skull no longer moans spookily — it plays its own track instead.
+## Description
+```
+The Halloween flying skull no longer moans spookily: it plays a track of its own instead.
 
 - Replaces the skull's idle sound: the track comes from the skull itself (3D) and fades with distance.
 - Plays at normal speed, without the skull's speed-based pitch shift.
 - The fire whoosh layered under the skull sound is muted (for the skull only; other enemies keep it).
-- Audio only, no gameplay changes. Client-side: only you hear it, nobody else needs the mod.
+- Audio-only mod: progression and regular lobbies are unaffected.
+- Client-side: only you hear it, other players don't need the mod.
 
-## Credits
+Летающий хэллоуинский череп больше не ухает зловеще, теперь он играет свой трек. Звук идёт из самого черепа и затихает с расстоянием, без замедления и ускорения от скорости полёта. Огненный «вжух» под звуком черепа отключён (только у черепа, у других врагов он остаётся). Только звук, работает на клиенте: слышишь только ты, остальным мод не нужен.
 
-- Track: <автор трека / лицензия>
-- Mod: <ваш ник>
+All music belongs to its respective artists and labels.
+```
